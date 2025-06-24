@@ -52,10 +52,10 @@
 
           if (speed !== null) {
             let speedKmH = (speed * 3.6).toFixed(1); // Convertendo m/s para km/h
-            document.getElementById('speed').innerText = speedKmH + " km/h";
+            document.getElementById('speed').innerText = speedKmH; // + "Km/h";
             status.innerText = "Sinal GPS ativo";
           } else {
-            document.getElementById('speed').innerText = "0.0 km/h";
+            document.getElementById('speed').innerText = "0.0"; //km/h";
             status.innerText = "Sem velocidade... continue se movendo";
           }
         },
