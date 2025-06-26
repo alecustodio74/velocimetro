@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Alexandre Ricardo Custódio de Souza @alecustodio74">
   <title>Velocímetro Digital</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <style>
@@ -31,16 +32,50 @@
       text-shadow: 0 0 20px red;
     }
 
-   @font-face { /*para buscar a fonte na pasta raiz */
-     font-family: 'Digital Readout Thick';
-     src: url('DigitalReadoutThick.ttf') format('truetype');
-   ?
-    
+    @font-face { /*para buscar a fonte na pasta raiz */
+    font-family: 'Digital Readout Thick';
+    src: url('DigitalReadoutThick.ttf') format('truetype');
+   }
 
     #status {
       font-size: 20px;
       margin-top: 10px;
       color: #aaa;
+    }
+
+  button:hover {
+    background-color: darkred;
+  }
+
+  #fullscreenBtn {
+      /*position: absolute;*/
+      /*top: 20px;*/
+      margin-top: 30px;
+      right: 20px;
+      padding: 12px 20px;
+      background-color: red;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 10px red;
+    }
+
+    #fullscreenBtn:hover {
+      background-color: darkred;
+    }
+
+    /* Esconde o botão quando estiver em tela cheia */
+    :fullscreen #fullscreenBtn {
+      display: none;
+    }
+    /* Compatibilidade com Safari */
+    :-webkit-full-screen #fullscreenBtn {
+      display: none;
+    }
+    :-moz-full-screen #fullscreenBtn {
+      display: none;
     }
   </style>
 </head>
@@ -49,7 +84,8 @@
   <h1>Velocímetro Digital</h1>
   <div id="speed">0.0</div><h1>Km/h</h1>
   <div id="status">Aguardando sinal GPS...</div>
-
+  <button id="fullscreenBtn" onclick="entrarTelaCheia()">Tela Cheia</button>
+  
   <script>
     if ("geolocation" in navigator) {
       navigator.geolocation.watchPosition(
@@ -80,6 +116,19 @@
       document.getElementById('status').innerText = "Geolocalização não suportada neste navegador.";
     }
   </script>
+
+<script>
+  function entrarTelaCheia() {
+    const elem = document.documentElement; // Pode ser outro elemento, como body ou uma div
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { // Safari
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { // IE11
+      elem.msRequestFullscreen();
+    }
+  }
+</script>
 
 </body>
 </html>
